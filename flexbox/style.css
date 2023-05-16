@@ -13,8 +13,8 @@ h1 {
     background-color: rgb(238, 238, 238);
     display: flex;
     font-weight: bold;
-    min-height: 400px;
-    flex-wrap: wrap;
+    /* min-height: 400px; */
+    /* flex-wrap: wrap; */
     align-items: center;
     justify-content: center;
     align-content: space-around;
