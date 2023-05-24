@@ -53,6 +53,14 @@ header {
     background-color: black;
     width: 100%;
     z-index: 1;
+    & .logo {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        & img {
+            height: 50px;
+        }
+    }
     & li {
         display: inline-block;
         margin-left: 20px;
@@ -62,14 +70,6 @@ header {
     }
     & a:hover {
         color: rgb(207, 32, 32);
-    }
-}
-.logo {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-start;
-    & img {
-        height: 50px;
     }
 }
 main {
