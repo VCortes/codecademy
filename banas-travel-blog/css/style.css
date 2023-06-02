@@ -30,13 +30,25 @@ html {
     color: white;
 }
 
+@media only screen and (max-width: 660px) {
+    #banner h1 {
+        font-size: 2.5rem;
+    }
+
+    .images .image-container {
+        display: block !important;
+        max-width: 80% !important;
+        margin: auto;
+    }
+
+    #blog .post {
+        width: 80% !important;
+    }
+}
+
 #blog {
     width: 90%;
     margin: auto;
-    /* width: 86%; */
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
 }
 
 #blog .post {
@@ -48,9 +60,6 @@ html {
     color: #444444;
     line-height: 1.8;
     text-align: center;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
 }
 
 .post h2 {
