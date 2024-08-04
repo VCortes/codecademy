@@ -94,7 +94,8 @@ nav ul li {
 
 /* Apesar de .container definir outra regra para padding, a regra abaixo sobrescreve a anterior */
 main>.container {
-    margin: 80px 0px;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 /* Imagem posicionada com float left e margens dos quatro lados */
@@ -115,7 +116,6 @@ main .jumbotron {
     text-align: right;
     position: relative;
     top: 220px;
-    margin: 0 10px;
 }
 
 /* A margem vertical não tem efeito de separação em elementos inline, portanto usar inline-block ou float right */
