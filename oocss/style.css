@@ -1,14 +1,9 @@
 @layer settings, tools, base, layout, module, theme, state, utilities;
-/* Importar normalize.css dentro da layer base */
-@import url('normalize.css') layer(base);
 
-@layer base {
-    html {
-        font-family: Roboto, sans-serif;
-    }
+@layer settings {
 
+    /* Cores */
     :root {
-        /*  */
         --t-primary-color: #3A608F;
         --t-on-primary: #FFFFFF;
         --t-secondary-container: #FFDBCB;
@@ -22,6 +17,19 @@
         --t-outline: #7C7767;
         --t-outline-variant: #CDC6B4;
         --t-shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fontes */
+    :root {
+        --t-primary-font-family: 'Roboto', sans-serif;
+    }
+}
+
+@import url('normalize.css') layer(base);
+
+@layer base {
+    html {
+        font-family: Roboto, sans-serif;
     }
 }
 
@@ -114,7 +122,6 @@
     .botao:active {
         filter: brightness(0.8);
     }
-
 }
 
 @layer theme {
@@ -174,7 +181,6 @@
 }
 
 @layer utilities {
-
     .body-font {
         font-family: Verdana, Arial, Helvetica, sans-serif;
     }
