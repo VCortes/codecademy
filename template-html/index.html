@@ -8,121 +8,6 @@
     <link rel="stylesheet" href="Template/style.css" id="style-link">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet" id="font-link">
-    <style id="roteiro-overlay-styles">
-        .expanding-button {
-            align-items: center;
-            height: 60px;
-            justify-content: center;
-            overflow: hidden;
-            padding: 0;
-            position: fixed;
-            width: 60px;
-            transition: width 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
-                border-radius 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
-                transform 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
-                background-color 0.3s;
-        }
-
-        .expanding-button__text {
-            left: 50px;
-            font-size: 15px;
-            position: absolute;
-            line-height: 1.2em;
-        }
-
-        .t-expanding-button {
-            cursor: grab;
-            display: flex;
-            -webkit-user-select: none;
-            user-select: none;
-            background-color: #3b3a3b;
-            border-radius: 50%;
-            border: 1px solid #ffffff7c;
-            color: #fff;
-        }
-
-        .expanding-button:active {
-            cursor: grabbing;
-        }
-
-        .expanding-button .expanding-button__text,
-        .expanding-button .expanding-button__right-icon {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            /* Transição rápida para opacidade 0 */
-            color: #fff;
-        }
-
-        .expanding-button.expanded {
-            background-color: #555;
-            border-radius: 999rem;
-        }
-
-        /* #fullscreen-button.expanded {
-            width: 155px;
-        } */
-        #scriptButton.expanded {
-            width: 190px;
-        }
-
-        .expanding-button.expanded .expanding-button__text,
-        .expanding-button.expanded .expanding-button__right-icon {
-            opacity: 1;
-            transition: opacity 3s ease;
-            /* Transição lenta para opacidade 1 */
-        }
-
-        .expanding-button.expand-left {
-            /* Inverte a ordem dos elementos */
-            flex-direction: row-reverse;
-        }
-
-        /* #fullscreen-button.expand-left {
-            transform: translateX(calc(-190px + 60px));
-        } */
-        #scriptButton.expand-left {
-            /* Move o botão para a esquerda durante a expansão */
-            transform: translateX(calc(-155px + 60px));
-        }
-
-        .expanding-button svg {
-            /* Cor dos ícones SVG */
-            fill: #fff;
-        }
-
-        .expanding-button__left-icon {
-            width: 30px;
-            height: 30px;
-            stroke: #ffffff;
-            position: absolute;
-            left: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .expanding-button__right-icon {
-            width: 20px;
-            height: 20px;
-            stroke: #ffffff;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #fullscreen-button {
-            right: 20px;
-            bottom: 20px;
-        }
-
-        #scriptButton {
-            left: 20px;
-            bottom: 20px;
-        }
-    </style>
 </head>
 
 <body>
@@ -175,6 +60,7 @@
     </div>
     <script id="roteiro-overlay-script">
         function createOverlay() {
+            console.log('createOverlay()');
             // ----------------- Obter conteúdo do roteiro -----------------
             // Obter os parâmetros da URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -666,14 +552,14 @@
             document.addEventListener('keydown', handleEsc);
         }
     </script>
-    <script  type="module">
+    <script>
         // Função para fazer a requisição ao JSON
         const requestDataFromJson = async () => {
             const jsonData = await fetch('./data.json');
             const { names: dataFromJson } = await jsonData.json();
             return dataFromJson;
         }
-        const dataFromJson = await requestDataFromJson();
+        const dataFromJson = requestDataFromJson();
         // String com todos os query parameters da URL atual
         const queryString = window.location.search;
         // Obter os parâmetros da URL
@@ -766,14 +652,11 @@
                             const element = document.getElementById(id);
                             if (element) {
                                 const clone = element.cloneNode(true);
-                                // Opcional: Remover o ID para evitar duplicação
-                                clone.removeAttribute('id');
                                 iframeDoc.head.appendChild(clone);
                             }
                         };
                         appendOnHeadById('style-link');
                         appendOnHeadById('font-link');
-                        appendOnHeadById('roteiro-overlay-styles');
                         // ----------------- Inserir script no iframe -----------------
                         // Obter o conteúdo de id="roteiro-overlay-script" como texto
                         const scriptOverlay = document.getElementById('roteiro-overlay-script');
@@ -781,7 +664,24 @@
                         let scriptOverlayText = scriptOverlay.textContent || scriptOverlay.innerText;
                         // Adiciona a chamada para a função createOverlay() após o DOM estar pronto
                         scriptOverlayText += `
-                    createOverlay();
+const checkCSSLoaded = () => {
+    const linkElement = document.getElementById('style-link');
+    const maxRetries = 100; // Limite de tentativas
+    let attempts = 0;
+    const intervalId = setInterval(() => {
+        if (linkElement.sheet) {
+            console.log('CSS carregado. Executando script...');
+            createOverlay();
+            clearInterval(intervalId);
+            // Coloque aqui o código que depende do CSS
+        } else if (attempts >= maxRetries) {
+            console.error('Erro: O CSS não foi carregado após várias tentativas.');
+            clearInterval(intervalId);
+        }
+        attempts++;
+    }, 100); // Verifica a cada 100ms
+};
+checkCSSLoaded();
                 `;
                         scriptIframe.textContent = scriptOverlayText;
                         iframeDoc.body.appendChild(scriptIframe);

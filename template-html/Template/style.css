@@ -266,4 +266,120 @@
             max-width: 1320px;
         }
     }
+
+    .expanding-button__text {
+        left: 50px;
+        font-size: 15px;
+        position: absolute;
+        line-height: 1.2em;
+    }
+
+    .t-expanding-button {
+        cursor: grab;
+        display: flex;
+        -webkit-user-select: none;
+        user-select: none;
+        background-color: #3b3a3b;
+        border-radius: 50%;
+        border: 1px solid #ffffff7c;
+        color: #fff;
+    }
+
+    .expanding-button:active {
+        cursor: grabbing;
+    }
+
+    .expanding-button .expanding-button__text,
+    .expanding-button .expanding-button__right-icon {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        /* Transição rápida para opacidade 0 */
+        color: #fff;
+    }
+
+    .expanding-button.expanded {
+        background-color: #555;
+        border-radius: 999rem;
+    }
+
+    .expanding-button.expanded .expanding-button__text,
+    .expanding-button.expanded .expanding-button__right-icon {
+        opacity: 1;
+        transition: opacity 3s ease;
+        /* Transição lenta para opacidade 1 */
+    }
+
+    .expanding-button.expand-left {
+        /* Inverte a ordem dos elementos */
+        flex-direction: row-reverse;
+    }
+
+    /* #fullscreen-button.expand-left {
+            transform: translateX(calc(-190px + 60px));
+        } */
+
+    #scriptButton.expand-left {
+        /* Move o botão para a esquerda durante a expansão */
+        transform: translateX(calc(-155px + 60px));
+    }
+
+    .expanding-button svg {
+        /* Cor dos ícones SVG */
+        fill: #fff;
+    }
+
+    .expanding-button__left-icon {
+        width: 30px;
+        height: 30px;
+        stroke: #ffffff;
+        position: absolute;
+        left: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanding-button__right-icon {
+        width: 20px;
+        height: 20px;
+        stroke: #ffffff;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanding-button {
+        align-items: center;
+        height: 60px;
+        justify-content: center;
+        overflow: hidden;
+        padding: 0;
+        position: fixed;
+        width: 60px;
+        transition: width 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
+            border-radius 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
+            transform 0.55s cubic-bezier(0.645, 0.045, 0.355, 1),
+            background-color 0.3s;
+    }
+
+    #fullscreen-button {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    #scriptButton {
+        left: 20px;
+        bottom: 20px;
+    }
+
+    /* #fullscreen-button.expanded {
+            width: 155px;
+    } */
+
+    #scriptButton.expanded {
+        width: 190px !important;
+    }
 }
