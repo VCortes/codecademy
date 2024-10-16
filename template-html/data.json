@@ -5,7 +5,7 @@
             "buttonName": "Ensaio de torção",
             "folderName": "laboratorio",
             "laboratoryId": "103",
-            "androidAvailable": false,
+            "androidAvailable": true,
             "iosAvailable": false
         }
     ]
