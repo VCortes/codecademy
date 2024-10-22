@@ -11,7 +11,6 @@ function createOverlay() {
     // Função para fazer a requisição ao Composite Object API
     async function fetchCompositeObject() {
         if (compositeObjectId) {
-            // const apiUrl = `https://api.plataforma.grupoa.education/v1/marketplace-bff/retrieve-object/script/${compositeObjectId}`;
             const apiUrl = `https://api.dev-plataforma.grupoa.education/v1/marketplace-bff/retrieve-object/script/${compositeObjectId}`;
             try {
                 const response = await fetch(apiUrl, {
@@ -26,6 +25,7 @@ function createOverlay() {
                     );
                 }
                 const data = await response.json();
+                console.log('Dados do Composite Object:', data);
                 // Verifica se existem arquivos e procura por um PDF
                 if (data.files && data.files.length > 0) {
                     const pdfFile = data.files.find((file) =>
@@ -35,8 +35,19 @@ function createOverlay() {
                         return pdfFile.url; // Retorna a URL do PDF
                     }
                 }
-                // Se não houver PDF, retorna o conteúdo HTML
+                // Se não houver PDF nos arquivos, verifica o conteúdo HTML
                 if (data.html) {
+                    // Parseia o conteúdo HTML para procurar pelo elemento <grupoabook>
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data.html, 'text/html');
+                    const grupoabookElement = doc.querySelector('grupoabook');
+                    if (grupoabookElement) {
+                        const pdfUrl = grupoabookElement.getAttribute('file');
+                        if (pdfUrl) {
+                            return pdfUrl; // Retorna a URL do PDF encontrada no atributo 'file'
+                        }
+                    }
+                    // Se não encontrar o PDF no elemento <grupoabook>, retorna o HTML
                     return data.html;
                 }
                 // Caso não haja arquivos nem HTML
@@ -514,24 +525,23 @@ function startScript() {
     const linkElement = document.getElementById('style-link');
     const maxRetries = 100; // Limite de tentativas
     let attempts = 0;
-
     const checkResources = () => {
         const cssLoaded = linkElement.sheet;
-        const domReady = document.readyState === 'interactive' || document.readyState === 'complete';
+        const domReady =
+            document.readyState === 'interactive' || document.readyState === 'complete';
         const containerExists = document.getElementById('l-canvas-container') !== null;
-
         if (cssLoaded && domReady && containerExists) {
             console.log('Recursos carregados. Executando script...');
             setTimeout(createOverlay, 2000); // Aguarda 1 segundo antes de executar o script
         } else if (attempts >= maxRetries) {
-            console.error('Erro: Recursos necessários não foram carregados após várias tentativas.');
+            console.error(
+                'Erro: Recursos necessários não foram carregados após várias tentativas.'
+            );
         } else {
             attempts++;
             setTimeout(checkResources, 100);
         }
     };
-
     checkResources();
 }
-
 startScript();
