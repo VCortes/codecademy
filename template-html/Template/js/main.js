@@ -1,7 +1,7 @@
 // Função para fazer a requisição ao JSON
 const requestDataFromJson = async () => {
     try {
-        const response = await fetch('./data.json');
+        const response = await fetch('../data.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -15,6 +15,8 @@ const requestDataFromJson = async () => {
 
 // Função principal assíncrona para controlar o fluxo
 const main = async () => {
+
+
     // Aguardar a obtenção dos dados
     const dataFromJson = await requestDataFromJson();
 
@@ -144,7 +146,7 @@ const transferContent = (iframe) => {
 
         // Inserir script no iframe
         const scriptIframe = iframeDoc.createElement('script');
-        scriptIframe.src = 'Template/overlay.js'; // Ajuste o caminho se necessário
+        scriptIframe.src = 'Template/js/overlay.js'; // Ajuste o caminho se necessário
         iframeDoc.body.appendChild(scriptIframe);
     }
 };
