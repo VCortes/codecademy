@@ -3,15 +3,30 @@ function createOverlay() {
     // ----------------- Obter conteúdo do roteiro -----------------
     // Obter os parâmetros da URL
     const urlParams = new URLSearchParams(window.location.search);
+    const environment = urlParams.get('environment');
     const authorizationToken = urlParams.get('authorization');
     const compositeObjectId = urlParams.get('compositeObjectId');
+    let isPDF = false;
     // Variáveis para controle de estado
     let contentLoaded = false;
     let lastScrollPosition = 0;
+    function getApiBaseUrl(env) {
+        switch (env) {
+            case 'dev':
+                return 'https://api.dev-plataforma.grupoa.education/v1/marketplace-bff/retrieve-object/script';
+            case 'hlg':
+                return 'https://api.hlg-plataforma.grupoa.education/v1/marketplace-bff/retrieve-object/script';
+            default:
+                return 'https://api.plataforma.grupoa.education/v1/marketplace-bff/retrieve-object/script';
+        }
+    }
     // Função para fazer a requisição ao Composite Object API
-    async function fetchCompositeObject() {
+    async function fetchScriptCompositeObject() {
         if (compositeObjectId) {
-            const apiUrl = `https://api.dev-plataforma.grupoa.education/v1/marketplace-bff/retrieve-object/script/${compositeObjectId}`;
+            // Determina a base da URL com base no ambiente
+            const baseUrl = getApiBaseUrl(environment);
+            // Constrói a URL completa incluindo o compositeObjectId
+            const apiUrl = `${baseUrl}/${compositeObjectId}`;
             try {
                 const response = await fetch(apiUrl, {
                     method: 'GET',
@@ -25,7 +40,6 @@ function createOverlay() {
                     );
                 }
                 const data = await response.json();
-                console.log('Dados do Composite Object:', data);
                 // Verifica se existem arquivos e procura por um PDF
                 if (data.files && data.files.length > 0) {
                     const pdfFile = data.files.find((file) =>
@@ -60,8 +74,8 @@ function createOverlay() {
         }
     }
     // Chamar as funções para fazer as requisições
-    let openOverlayFunction = function () {};
-    fetchCompositeObject().then((result) => {
+    let openOverlayFunction = function () { };
+    fetchScriptCompositeObject().then((result) => {
         if (result) {
             // Verifica se a string é uma URL de PDF
             if (result.endsWith('.pdf')) {
@@ -452,6 +466,7 @@ function createOverlay() {
     const dynamicContent = document.getElementById('overlay__script-content');
     // Função para abrir o overlay
     function openHTMLOverlay(htmlString) {
+        isPDF = false; 
         if (!contentLoaded) {
             // Atualizar o conteúdo HTML apenas se ainda não foi carregado ou se estava mostrando PDF
             dynamicContent.innerHTML = htmlString;
@@ -472,6 +487,7 @@ function createOverlay() {
         overlayContent.style.display = 'block';
     }
     function openPDFOverlay(pdfUrl) {
+        isPDF = true;
         if (!contentLoaded) {
             // Atualizar o src do iframe apenas se ainda não foi carregado ou se estava mostrando HTML
             pdfIframe.src = pdfUrl;
