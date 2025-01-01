@@ -1,0 +1,207 @@
+/*******************************************************/
+/*                   Paleta de cores                   */
+/*******************************************************/
+/*
+  #567358 (verde-escuro)
+  #A5BFA4 (verde-claro)
+  #D9D8D7 (cinza claro)
+  #F2695C (laranja/rosa forte)
+  #D98179 (laranja/rosa médio)
+  #000000 (preto)
+*/
+
+/* Reset simples */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*******************************************************/
+/*                   Estilos Gerais                    */
+/*******************************************************/
+body {
+    /* Fundo geral do site */
+    background-color: #D9D8D7;
+    font-family: 'Roboto', sans-serif;
+    color: #000000;
+    /* Texto principal em preto para melhor legibilidade */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/*******************************************************/
+/*                      Navbar                         */
+/*******************************************************/
+.navbar {
+    /* Degradê entre verde-escuro e verde-claro */
+    background: linear-gradient(to right, #567358, #A5BFA4);
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Sombra leve */
+}
+
+.navbar-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    color: #D9D8D7;
+    /* Texto na navbar em cinza claro para contraste */
+}
+
+.nav-label {
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+.nav-select {
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: 2px solid #D9D8D7;
+    border-radius: 4px;
+    background-color: #D9D8D7;
+    color: #567358;
+    cursor: pointer;
+}
+
+/*******************************************************/
+/*                  Seção Principal                    */
+/*******************************************************/
+.main-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    flex-grow: 1;
+}
+
+/* Título e subtítulo */
+.site-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000000;
+    /* Título em preto para destaque */
+    margin-bottom: 0.5rem;
+}
+
+.site-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #567358;
+    /* Subtítulo em verde-escuro */
+    margin-bottom: 2rem;
+}
+
+/*******************************************************/
+/*                Sessões de Calculadora               */
+/*******************************************************/
+.calculator-section {
+    /* Card de fundo com verde-claro */
+    background-color: #A5BFA4;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.calc-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+    /* Título da calculadora em preto para destaque */
+    margin-bottom: 1rem;
+    /* Linha de destaque em cor forte */
+    border-bottom: 2px solid #F2695C;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+/*******************************************************/
+/*                   Formulários                       */
+/*******************************************************/
+.calc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-width: 400px;
+}
+
+/* Rótulos */
+.calc-form label {
+    font-weight: bold;
+    color: #000000;
+    /* Rótulos em preto para melhor legibilidade */
+}
+
+/* Inputs e selects */
+.calc-form input,
+.calc-form select {
+    padding: 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #567358;
+    background-color: #D9D8D7;
+    /* Combina com o fundo geral */
+    color: #000000;
+    /* Texto dos inputs em preto */
+    font-size: 1rem;
+}
+
+/* Botão */
+.calc-form button {
+    background-color: #F2695C;
+    color: #D9D8D7;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover no botão */
+.calc-form button:hover {
+    background-color: #D98179;
+    transform: translateY(-2px);
+}
+
+/*******************************************************/
+/*           Classes de visibilidade (JS)              */
+/*******************************************************/
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+/*******************************************************/
+/*                   Responsividade                    */
+/*******************************************************/
+@media (max-width: 600px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-select {
+        margin-top: 0.5rem;
+    }
+
+    .site-title {
+        font-size: 1.6rem;
+    }
+
+    .calc-form {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+

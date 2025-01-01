@@ -1,0 +1,182 @@
+/* Reset simples */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fonte padrão */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #D9D8D7;
+    /* Cinza Claro */
+    color: #567358;
+    /* Verde Escuro */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #567358;
+    /* Verde Escuro */
+    padding: 1rem;
+    color: #D9D8D7;
+    /* Cinza Claro */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.nav-label {
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+
+.nav-select {
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 180px;
+    background-color: #A5BFA4;
+    /* Verde Claro */
+    color: #567358;
+    /* Verde Escuro */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Seção principal */
+.main-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    flex-grow: 1;
+}
+
+/* Título principal */
+.site-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #567358;
+    /* Verde Escuro */
+}
+
+.site-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #2c2c2c;
+    /* Verde Claro */
+    margin-bottom: 2rem;
+}
+
+/* Seções de calculadora */
+.calculator-section {
+    margin-bottom: 3rem;
+    background-color: #FFFFFF;
+    /* Branco para contraste */
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.calc-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #F2695C;
+    /* Rosa/Vermelho Claro */
+    border-bottom: 2px solid #F2695C;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+/* Formulários */
+.calc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    max-width: 400px;
+}
+
+.calc-form label {
+    font-weight: 600;
+    color: #567358;
+    /* Verde Escuro */
+}
+
+.calc-form input,
+.calc-form select {
+    padding: 0.6rem;
+    border: 1px solid #A5BFA4;
+    /* Verde Claro */
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #F9F9F9;
+    color: #567358;
+    /* Verde Escuro */
+}
+
+.calc-form input::placeholder {
+    color: #A5BFA4;
+}
+
+.calc-form button {
+    background-color: #F2695C;
+    /* Rosa/Vermelho Claro */
+    color: #FFFFFF;
+    /* Branco */
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.calc-form button:hover {
+    background-color: #D98179;
+    /* Rosa/Vermelho Médio */
+    transform: translateY(-2px);
+}
+
+/* Botão de voltar ao topo */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #F2695C;
+    color: #D9D8D7;
+    font-size: 2rem;
+    cursor: pointer;
+    /* Para ficar sempre visível, use "display: flex" (ou "block") */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Efeito de hover */
+#scrollToTopBtn:hover {
+    background-color: #D98179;
+    transform: translateY(-2px);
+}

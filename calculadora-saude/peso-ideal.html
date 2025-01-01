@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Peso Ideal</title>
+    <!-- Fonte Google (exemplo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="css/demo.css">
+</head>
+
+<body>
+    <!-- Cabeçalho/Navegação -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <label for="calculator-select" class="nav-label">Escolha a calculadora:</label>
+            <select id="calculator-select" class="nav-select" onchange="window.location.href=this.value">
+                <option value="peso-ideal.html">Peso Ideal</option>
+                <option value="dobras.html">Dobras Cutâneas</option>
+                <option value="agua.html">Consumo de Água</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Seção principal -->
+    <main class="main-section">
+        <!-- Título principal -->
+        <h1 class="site-title">Calculadora de Peso Ideal</h1>
+        <p class="site-subtitle">
+            Utilize a calculadora abaixo para realizar o cálculo do seu peso ideal.
+        </p>
+
+        <!-- Formulário de cálculo de peso ideal -->
+        <section id="formula" class="calculator-section visible">
+            <h2 class="calc-title">Cálculo de Peso Ideal</h2>
+            <form class="calc-form">
+                <label for="altura">Altura (m):</label>
+                <input type="number" step="0.01" id="altura" name="altura" required />
+
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select>
+
+                <button type="submit">Calcular</button>
+            </form>
+        </section>
+
+        <!-- Seção de informações adicionais -->
+        <section id="sobre" class="calculator-section">
+            <h2 class="calc-title">Sobre o Cálculo de Peso Ideal</h2>
+            <p>
+                Existem diversas fórmulas para estimar o peso ideal. Esta calculadora
+                utiliza um método simples como ponto de partida, mas recomenda-se
+                sempre consultar um profissional de saúde.
+            </p>
+        </section>
+    </main>
+
+    <!-- Botão de Voltar ao Topo -->
+    <button id="scrollToTopBtn" title="Voltar ao topo">&#8679;</button>
+
+
+    <!-- Script principal (caso tenha funcionalidades JS adicionais) -->
+    <script type="module" src="js/main.js"></script>
+    <script>
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // Ao clicar no botão, fazer scroll suave até o topo
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
